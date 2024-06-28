@@ -24,3 +24,15 @@ ls
 - Implement the game logic for the player's turn
 - Implement the game logic for the computer's turn
 - Detect a win
+
+## Assignments
+  Interface Team
+- mickey- player board
+  player position and enemy shots
+- tim - enemy board
+  player shots w hits
+- Brandon
+  tracking shots, turns, positions, etc.
+- Cody
+  User input and computer shots (Game Logic)
+- 
