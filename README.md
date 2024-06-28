@@ -1,3 +1,5 @@
+
+ls
 # Team 2 Battleship!!
 
 ## Battleship rules:
