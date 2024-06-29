@@ -35,4 +35,6 @@ ls
   tracking shots, turns, positions, etc.
 - Cody
   User input and computer shots (Game Logic)
-- 
+- Any Doofus who thinks he can get it to work
+  My vote is Brandon with Coordination with Adam and maybe some sneaky secret friends that all live in the same Degenerate Repo
+  
