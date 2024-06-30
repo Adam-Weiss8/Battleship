@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       hello world
-      <GameBoard PShot={[2, 2]} />
+      <GameBoard PShip={[[5,5],[5,6],[5,7]]}/>
     </>
   )
 }
