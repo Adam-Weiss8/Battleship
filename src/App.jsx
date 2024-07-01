@@ -59,11 +59,11 @@ function Grid({locked}) {
 
   return (
     <div style = {{ display: 'flex' }}>
-      <div style = {{ marginRight: '20px', backgroundImage: 'url(assets/Ship_Start.jpg)', padding: '10px' }}>
+      <div style = {{ marginRight: '20px', backgroundImage: 'url(src/assets/Ship_Start.jpg)', padding: '10px' }}>
         <h3>Shipyard</h3>
         {/* Placeholder for Ships */}
       </div>
-      <div style = {{ backgroundImage: 'url(assets/Board.jpg)', padding: '10px' }}>
+      <div style = {{ backgroundImage: 'url(src/assets/Board.jpg)', padding: '10px' }}>
         <div style = {{ display: 'flex' }}>
           <div style = {{ width: '50px' }} />
           {cols.map(col => (
@@ -85,11 +85,11 @@ function Grid({locked}) {
 
 function App() {
   const [images, setImages] = useState([
-    { id: 'Carrier', src: 'assets/Carrier.png', width: 1, height: 5, onGrid: false },
-    { id: 'Battleship', src: 'assets/Battleship.png', width: 1, height: 4, onGrid: false },
-    { id: 'Cruiser', src: 'assets/Cruiser.png', width: 1, height: 3, onGrid: false },
-    { id: 'Submarine', src: 'assets/Submarine.png', width: 1, height: 3, onGrid: false },
-    { id: 'Destroyer', src: 'assets/Destroyer.png', width: 1, height: 2, onGrid: false },
+    { id: 'Carrier', src: 'src/assets/Carrier.png', width: 1, height: 5, onGrid: false },
+    { id: 'Battleship', src: 'src/assets/Battleship.png', width: 1, height: 4, onGrid: false },
+    { id: 'Cruiser', src: 'src/assets/Cruiser.png', width: 1, height: 3, onGrid: false },
+    { id: 'Submarine', src: 'src/assets/Submarine.png', width: 1, height: 3, onGrid: false },
+    { id: 'Destroyer', src: 'src/assets/Destroyer.png', width: 1, height: 2, onGrid: false },
   ]);
   const [locked, setLocked] = useState(false); //define locked state
 
@@ -120,7 +120,7 @@ function App() {
   return (
     <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
       <Grid locked = {locked} />
-      <div style = {{ display: 'flex', flexDirection: 'column', marginRight: '20px', backgroundImage: 'url(assets/Ship_start.png)', padding: '10px' }}>
+      <div style = {{ display: 'flex', flexDirection: 'column', marginRight: '20px', backgroundImage: 'url(src/assets/Ship_start.png)', padding: '10px' }}>
         {images.map((image) => (
           <DraggableImage
             key = {image.id}
