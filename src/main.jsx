@@ -1,10 +1,14 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import React from 'react';
+import GameBoard from './components/GameBoard';
+import './App.css';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+function App() {
+  return (
+    <div className="App">
+      <h1>Battleship Game</h1>
+      <GameBoard />
+    </div>
+  );
+}
+
+export default App;
