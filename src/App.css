@@ -1,0 +1,10 @@
+.holding-area {
+  margin-right: 20px;
+  background-image: url('./assets/Ship_Start.jpg');
+  padding: 10px;
+}
+
+.grid-area {
+  background-image: url('./assets/Board.jpg');
+  padding: 10px;
+}
