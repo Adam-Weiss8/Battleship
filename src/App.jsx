@@ -1,20 +1,9 @@
 import React, { useState } from 'react'
-import './App.css'
 import {DndContext, useDraggable, useDroppable, closestCenter} from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 
-function App() {
-
-  return (
-    <>Hello World!</>
-  )
-}
-
-// export default App
-
-
 // Create a single box component
-function Box({ id }) {
+function Box({ id , locked }) {
   const { isOver, setNodeRef } = useDroppable({
     id,
   });
@@ -26,7 +15,7 @@ function Box({ id }) {
     height: '50px',
   };
 
-  return <div ref={setNodeRef} style={style} />;
+  return <div ref = {setNodeRef} style = {style} />;
 }
 
 // Create a draggable image component
@@ -42,7 +31,6 @@ function DraggableImage({ id, src, width, height, locked, onRotate}) {
     width: orientation === 'horizontal' ? `${width * 50}px` : `${height * 50}px`,
     height: orientation === 'horizontal' ? `${height * 50}px` : `${width * 50}px`,
     cursor: locked ? 'default' : 'grab',
-    pointerEvents: locked ? 'none' : 'auto',
   };
 
   const handleRotate = () => {
@@ -54,39 +42,39 @@ function DraggableImage({ id, src, width, height, locked, onRotate}) {
 
   return (
     <img
-      ref={setNodeRef}
-      src={src}
-      style={style}
-      {...listeners}
+      ref = {setNodeRef}
+      src = {src}
+      style = {style}
+      {...(!locked && listeners)}
       {...attributes}
-      onClick={handleRotate}
+      onClick = {!locked ? handleRotate: undefined}
     />
   );
 }
 
 // Create the main grid component with labels and holding area
-function Grid() {
+function Grid({locked}) {
   const rows = 'ABCDEFGHIJ';
   const cols = Array.from({ length: 10 }, (_, index) => index + 1);
 
   return (
-    <div style={{ display: 'flex' }}>
-      <div style={{ marginRight: '20px', backgroundImage: 'url(./assets/Ship_Start.jpg)', padding: '10px' }}>
+    <div style = {{ display: 'flex' }}>
+      <div style = {{ marginRight: '20px', backgroundImage: 'url(assets/Ship_Start.jpg)', padding: '10px' }}>
         <h3>Shipyard</h3>
         {/* Placeholder for Ships */}
       </div>
-      <div style={{ backgroundImage: 'url(./assets/Board.jpg)', padding: '10px' }}>
-        <div style={{ display: 'flex' }}>
-          <div style={{ width: '50px' }} />
+      <div style = {{ backgroundImage: 'url(assets/Board.jpg)', padding: '10px' }}>
+        <div style = {{ display: 'flex' }}>
+          <div style = {{ width: '50px' }} />
           {cols.map(col => (
-            <div key={col} style={{ width: '50px', textAlign: 'center' }}>{col}</div>
+            <div key = {col} style = {{ width: '50px', textAlign: 'center' }}>{col}</div>
           ))}
         </div>
         {rows.split('').map((row, rowIndex) => (
-          <div key={rowIndex} style={{ display: 'flex' }}>
-            <div style={{ width: '50px', textAlign: 'center' }}>{row}</div>
+          <div key = {rowIndex} style = {{ display: 'flex' }}>
+            <div style = {{ width: '50px', textAlign: 'center' }}>{row}</div>
             {cols.map(col => (
-              <Box key={`${row}${col}`} id={`${row}${col}`} />
+              <Box key = {`${row}${col}`} id = {`${row}${col}`} />
             ))}
           </div>
         ))}
@@ -97,12 +85,13 @@ function Grid() {
 
 function App() {
   const [images, setImages] = useState([
-    { id: 'Carrier', src: './assets/Carrier.png', width: 1, height: 5 },
-    { id: 'Battleship', src: './assets/Battleship.png', width: 1, height: 4 },
-    { id: 'Cruiser', src: './assets/Cruiser.png', width: 1, height: 3 },
-    { id: 'Submarine', src: './assets/Submarine.png', width: 1, height: 3 },
-    { id: 'Destroyer', src: './assets/Destroyer.png', width: 1, height: 2 },
+    { id: 'Carrier', src: 'assets/Carrier.png', width: 1, height: 5, onGrid: false },
+    { id: 'Battleship', src: 'assets/Battleship.png', width: 1, height: 4, onGrid: false },
+    { id: 'Cruiser', src: 'assets/Cruiser.png', width: 1, height: 3, onGrid: false },
+    { id: 'Submarine', src: 'assets/Submarine.png', width: 1, height: 3, onGrid: false },
+    { id: 'Destroyer', src: 'assets/Destroyer.png', width: 1, height: 2, onGrid: false },
   ]);
+  const [locked, setLocked] = useState(false); //define locked state
 
   const handleDragEnd = (event) => {
     const { active, over } = event;
@@ -130,21 +119,21 @@ function App() {
 
   return (
     <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-      <Grid locked={locked} />
-      <div style={{ display: 'flex', flexDirection: 'column', marginRight: '20px', backgroundImage: url('./assets/Ship_start.png'), padding: '10px' }}>
+      <Grid locked = {locked} />
+      <div style = {{ display: 'flex', flexDirection: 'column', marginRight: '20px', backgroundImage: 'url(assets/Ship_start.png)', padding: '10px' }}>
         {images.map((image) => (
           <DraggableImage
-            key={image.id}
-            id={image.id}
-            src={image.src}
-            width={image.width}
-            height={image.height}
-            locked={locked}
-            onRotate={handleRotate}
+            key = {image.id}
+            id = {image.id}
+            src = {image.src}
+            width = {image.width}
+            height = {image.height}
+            locked = {locked}
+            onRotate = {handleRotate}
           />
         ))}
       </div>
-      <button onClick={handleLock} style={{ marginTop: '20px' }}>
+      <button onClick = {handleLock} style = {{ marginTop: '20px' }}>
         Setup Complete, Lock in Ship Locations
       </button>
     </DndContext>
